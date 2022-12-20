@@ -1,0 +1,21 @@
+services:
+  workflow-builder_app:
+    container_name: workflow-builder_app
+    image: n8nio/n8n
+    restart: always
+    ports:
+      - "5678:5678"
+    volumes:
+      - ./n8n:/root/.n8n
+    environment:
+      - GENERIC_TIMEZONE=Asia/Tokyo
+      - N8N_LOG_OUTPUT=file
+    networks:
+      - traefik_reverse_proxy_network
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.workflow-builder.entrypoints=websecure
+      - traefik.http.routers.workflow-builder.rule=Host(`api.localhost`)
+networks:
+  traefik_reverse_proxy_network:
+    external: true
