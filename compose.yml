@@ -1,0 +1,12 @@
+services:
+  workflow-builder_app:
+    container_name: workflow-builder_app
+    image: n8nio/n8n
+    restart: always
+    ports:
+      - "5678:5678"
+    volumes:
+      - ./n8n:/root/.n8n
+    environment:
+      - GENERIC_TIMEZONE=Asia/Tokyo
+      - N8N_LOG_OUTPUT=file
