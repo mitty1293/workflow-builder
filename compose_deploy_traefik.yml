@@ -3,8 +3,6 @@ services:
     container_name: workflow-builder_app
     image: n8nio/n8n
     restart: always
-    ports:
-      - "5678:5678"
     volumes:
       - ./n8n:/root/.n8n
     environment:
@@ -14,8 +12,9 @@ services:
       - traefik_reverse_proxy_network
     labels:
       - traefik.enable=true
-      - traefik.http.routers.workflow-builder.entrypoints=websecure
-      - traefik.http.routers.workflow-builder.rule=Host(`api.localhost`)
+      - traefik.http.routers.workflow-builder.entrypoints=web
+      - traefik.http.routers.workflow-builder.rule=Host(`workflow-builder`)
+      - traefik.http.services.workflow-builder_app.loadbalancer.server.port=5678
 networks:
   traefik_reverse_proxy_network:
     external: true
