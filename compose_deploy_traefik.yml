@@ -12,8 +12,10 @@ services:
       - traefik_reverse_proxy_network
     labels:
       - traefik.enable=true
-      - traefik.http.routers.workflow-builder.entrypoints=web
-      - traefik.http.routers.workflow-builder.rule=Host(`workflow-builder`)
+      - traefik.http.routers.workflow-builder.entrypoints=websecure
+      - traefik.http.routers.workflow-builder.rule=Host(`workflow-builder.localhost`)
+      - traefik.http.routers.workflow-builder.tls=true
+      - traefik.http.routers.workflow-builder.tls.certresolver=myresolver
       - traefik.http.services.workflow-builder_app.loadbalancer.server.port=5678
 networks:
   traefik_reverse_proxy_network:
