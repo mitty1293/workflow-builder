@@ -11,4 +11,4 @@ my workflow builder
     ```
     docker compose -f compose_deploy_traefik.yml up -d
     ```
-2. `<host>/workflow-builder` にアクセス
+2. `<host>/workflow-builder.localhost` にアクセス
